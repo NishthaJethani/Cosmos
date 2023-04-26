@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Warden Dashboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Student</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for leave in leave_applications %}
+        <tr>
+          <td>{{ leave.start_date }}</td>
+          <td>{{ leave.end_date }}</td>
+          <td>{{ leave.reason }}</td>
+          <td>{{ leave.student.user.username }}</td>
+          <td><a href="{% url 'approve_leave' leave.id %}">Approve</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    
+{% for leave in pending_leaves %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ leave.student.first_name }} {{ leave.student.last_name }}</h5>
+        <p class="card-text">From: {{ leave.start_date }}<br>To: {{ leave.end_date }}<br>Reason: {{ leave.reason }}</p>
+        Approve
+        Reject
+    </div>
+</div>
+{% endfor %}
+
+  </table>
+{% endblock %}
+
+{% for leave in pending_leaves %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ leave.student.first_name }} {{ leave.student.last_name }}</h5>
+            <p class="card-text">From: {{ leave.start_date }}<br>To: {{ leave.end_date }}<br>Reason: {{ leave.reason }}</p>
+            Approve
+            Reject
+        </div>
+    </div>
+{% endfor %}

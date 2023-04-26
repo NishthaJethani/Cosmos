@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="{% url 'student_home' %}">Home</a></li>
+      <li>Apply Leave</li>
+      <li>View Leaves</li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'student_logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'student_login' %}">Login</a></li>
+        <li><a href="{% url 'register_student' %}">Register as a Student</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>
