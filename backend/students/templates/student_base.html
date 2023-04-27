@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    nav {
+        display: flex;  
+      align-items: center;
+      justify-content: flex-end;
+      color: white;
+      background-image: linear-gradient(to right,#3c4cad,#ab12f1,#720ca1);
+      padding: 10px;  
+
+  }
+    ul {
+
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    li {
+      margin-right: 20px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+
+    }
+    a:hover {
+      color: #ccc;
+    }
+    .logo {
+      margin-right: auto;  
+      font-size: larger;  
+      font-weight: bold;
+    }
+    .content {
+
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">I²IT Cosmos</div>
+    <ul>
+      <li><a href="{% url 'students:student_home' %}">Home</a></li>
+      <li><a href="#">Apply Leave</a></li>
+      <li><a href="#">View Leaves</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'students:student_logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'students:student_login' %}">Login</a></li>
+        <li><a href="{% url 'students:register_student' %}">Register as a Student</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
