@@ -1,0 +1,24 @@
+{% extends 'warden_base.html' %}
+
+{% block content %}
+<style>
+  .link{
+    color: blue;
+  }
+</style>
+  <h1 class="mt-4">Warden Dashboard</h1>
+  
+  {% for leave in pending_leaves %}
+  <div class="card mb-3">
+      <div class="card-body">
+          <h5 class="card-title">{{ leave.student.first_name }} {{ leave.student.last_name }}</h5>
+          <p class="card-text"><strong>From:</strong> {{ leave.start_date }}<br><strong>To:</strong> {{ leave.end_date }}<br><strong>Reason:</strong> {{ leave.reason }}</p>
+          <a class="link" href="{% url 'wardens:approve_leave' leave.id %}" class="btn btn-success">Approve</a>
+          <a class="link" href="#">Reject</a>
+          
+      </div>
+  </div>
+  <hr class="mb-4 mt-4" style="border-top: 1px solid #6c757d;">
+{% endfor %}
+
+{% endblock %}
